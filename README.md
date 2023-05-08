@@ -1,9 +1,27 @@
 ## Core shell functions for AI 
 
-alfa version
+## What is **AIyu**:
+In essence, the Aiyu Shell pipelines serve as the interweaving adhesive that binds the various AI components together - a technological superglue of sorts!
 
-**Open.ai** Gpt-3.5turbo text generation meets **Google** gTTS and **Mozzilla** TTS audio generation. Featuers improved audio quality using ffmpeg RNN noise supression filter and subtitle timestamp accuracy using **Aeneas** forced alignment.
-Fast **Whisper** ctranslate2 transcript generation, Translate-shell text to text translation, **Stable Diffusion** text to image and much more.
+**Aiyu** allows to build pipelines that easlily leverage the most exciting **ai** technologies using any laptop.
+
+#### example
+
+###### input:  audio in some language; output: audio in French
+```
+m2a; a2a fr; a2sk
+```
+Listen to your microphone and outputs an audio file (m2a), then use the previously created audio and translate it to French (a2a fr) and lastly plays the audio to your speaker (a2sk). 
+
+
+###### input: audio question in some language; output: audio GPT response in Italian
+```
+m2a; a2p; p2a; a2a it 
+```
+Listen to your microphone and outputs an audio file (m2a), then use the created audio and transcribes it to textual prompt (a2p), use the prompt to query GPT3.5-turbo and produce an audio of the answare (p2a) and lastly, use the created audio and translate it to Italian (a2a it).
+
+
+
 
 <details>
 
@@ -11,35 +29,26 @@ Fast **Whisper** ctranslate2 transcript generation, Translate-shell text to text
 
 ## Inputs and Outputs
 
-```c  -> code
-t  -> text
-a  -> audio
-s  -> subtitle
-tr -> translation
-i  -> image
-v --> video
-sk -> speaker
+```
+c  -> code     ex: sourcecode of a python program
+p  -> prompt     ex: "how can I escape the matrix?" 
+t  -> text       ex: .txt file of a motivation letter
+s  -> subtitle   ex: .srt file of a movie subtitles
+a  -> audio      ex: .mp3 file of a recorded conference 
+                 I/O: {sk -> speaker, m <- microphone} 
 ```
 </details>
 
-|     | t text    | a audio |
-|---- |------ |------ |
-| t   | `t2t`   | `t2a`   |
-| a   | `a2t`   | `a2a`   |
+### Current state of implemented functions
 
-|    	| c    	| t    	| a    	| s    	|  i 	|  tr 	|
-|----	|------	|------	|------	|------	|------	|---	|
-| c  	| c2c  	| c2t  	| c2a  	|  c2s   	| c2i 	| c2tr 	|
-| t  	| `t2c`  	| `t2t`  	| `t2a`  	| t2s 	| `t2i` 	| `t2tr`  	|
-| a  	| a2c  	| `a2t`  	| `a2a`  	| `a2s`  	| a2i 	|  a2tr 	|
-| s  	|  c2s   	| s2t  	| s2a  	| s2s  	| s2i 	|  s2tr 	|
-| i 	| i2c 	| i2t 	| i2a 	| i2s 	|  `i2i`  	|  i2tr 	|
+|    	      | prompt   	| text | subtitle	| audio |  code 	|
+|-----------|-----------|------|----------|-------|---------|
+| prompt  	| `p2p`	| `p2t` 	|  `ap2s` *	| `p2a` | `p2c` 	|
+| text  	  | t2p	| `t2t` | `at2s` * | `t2a` 	| `p2c` | 
+| subtitle 	| - | `s2t`	| `s2s`	| `s2a`	| -	|
+| audio   	|  `a2p` | `a2t`  | `a2s`	| `a2a` | a2c |
+| code 	    |  - | - | - | - |  `c2c` 	|
 
-Current state of implemented functions
-
-## What is **AIyu**:
-
-In essence, the Aiyu Shell pipelines serve as the interweaving adhesive that binds the various AI components together - a technological superglue of sorts!
 
 ## Features:
 
@@ -83,7 +92,7 @@ cd aiyu/
 ```
 ###### set the key to global scope: 
 ```
-export OPENAI_API_KEY="your key string here"
+. env.list
 ```
 ###### load a function:
 ```
@@ -91,18 +100,9 @@ export OPENAI_API_KEY="your key string here"
 ```
 ###### use it like this:
 ```
-t2a "Who is Lain?"
+t2a "How are you ?"
 ```
 
-### AIyu pipeline (WIP)
-
-example: suppose **question.mp3** is a file containing a question in english  
-```
-a2t question.mp3 && t2tr it && t2a
-```
-This turns the audio question into English text, translates it in Italian, then ask the question in Italian to gpt3.5 and produce Italian audio answer.
-
-Every function always looks for newly created inputs in /dev/shm/ if not explicitly specified.
 
 ##### Dependencies
 
@@ -123,13 +123,15 @@ They are prompted if missing and a link to install them is provided. Functions m
 
 ### Open for collaboartions; let's make **aiyu** awesome toghter
  
- * .env global
  * per-command tuning
  * wiki documentation 
- * compose functions to make new ones
  * suggestions are desired!
 
-#### Leave a star if you like this
+
+
+
+
+
 
 ### Citation
 If you utilize this reposistory please consider citing it with:
@@ -145,7 +147,12 @@ If you utilize this reposistory please consider citing it with:
 }
 ```
 
-
 ### Copyright
 
 Copyright © 2023 Gabriele Risso. 
+
+
+#### Contact for custom implementation: 
+```
+gabriele.risso@protonmail.ch
+```
