@@ -1,0 +1,77 @@
+FROM archlinux
+
+    #install deps
+
+    #docker
+    #RUN pacman -Sy 
+    RUN pacman-db-upgrade
+    RUN pacman -Syyu --noconfirm
+
+    RUN pacman -Sy && pacman -S --noconfirm docker
+    
+    RUN pacman -S --noconfirm bash
+    RUN pacman -S --noconfirm glow 
+    RUN pacman -S --noconfirm gum
+
+
+    #install python
+    RUN pacman -S --noconfirm python
+    RUN pacman -S --noconfirm python-pip
+    
+#p2t
+    RUN pip install --no-cache-dir gTTS
+
+
+#audio
+    RUN pacman -S --noconfirm pulseaudio alsa-utils
+    ENV PULSE_SERVER=host.docker.internal
+
+#p2a
+    RUN pip install --no-cache-dir whisper-ctranslate2
+
+    #ffmpeg
+    RUN pacman -S --noconfirm ffmpeg  
+    RUN pacman -S --noconfirm wget git
+
+#audio to text model
+    RUN whisper-ctranslate2 test.mp3 || true
+    #RUN whisper-ctranslate2
+#m2a
+    RUN pip3 install --no-cache-dir pvrecorder
+
+
+    RUN touch /root/.bashrc
+
+#cool bash prompt
+
+    #RUN pacman -S --noconfirm powerline
+    #RUN powerline-daemon -q
+    #RUN echo "POWERLINE_BASH_CONTINUATION=1" >> /root/.bashrc
+    #RUN echo "POWERLINE_BASH_SELECT=1" >> /root/.bashrc
+    #RUN echo ". /usr/share/powerline/bindings/bash/powerline.sh" >> /root/.bashrc
+    
+    #RUN touch .env
+    #RUN touch /root/.bashrc
+    #RUN export BASH_IT_THEME="powerline-multiline"
+    #import your bashrc here
+    #RUN git clone https://github.com/petobens/trueline ~/trueline
+    #RUN echo 'source ~/trueline/trueline.sh' >> ~/.bashrc
+    #RUN echo "export PS1=$'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\e[16A'"$PS1"" >> /root/.bashrc
+
+    RUN pip install --no-cache-dir powerline-status
+ 
+# Redo
+#    RUN bash <(curl -s https://raw.githubusercontent.com/barthr/redo/master/install.sh)
+
+# source
+
+    RUN curl -s https://raw.githubusercontent.com/basherpm/basher/master/install.sh | bash
+    #RUN basher include gabrielerisso/aiyu p2t
+    #RUN basher include gabrielerisso/aiyu p2a
+
+ #    RUN basher include gabrielerisso/aiyu all-matrix-functions
+    
+
+    CMD bash -c ". /.env"
+
+  
