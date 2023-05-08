@@ -52,12 +52,13 @@ a  -> audio      ex: .mp3 file of a recorded conference
 
 ## Features:
 
- * **Hackable**
- * It support most languages
- * **Linux** and **Mac** compatible. Windows is coming soon.
- * Beautiful [Charm](https://charm.sh/ "Charm") **TUI interface** written in Go.
- * Bash function editor and experimental **Markdown reader**.
- * focused on CPU **performance**
+ * **Runs on Windows, Mac & Linux thanks to Docker**
+ * Brings to your CLI only the best of the best of the latest AI technologies.
+ * Modern [Charm](https://charm.sh/ "Charm") themale **TUI interface** written in Go.
+ * Included **Markdown reader** for optimal formatting.
+ * Focused on CPU **performance** and **consumer laptop** smooth exeperience 
+ * Centralized environment file ( **.env** ) to set all your parameters
+ * Docker in Docker architecture allows for extreme flexibility
  * Documented (very soon)
 <details>
 
@@ -72,35 +73,39 @@ a  -> audio      ex: .mp3 file of a recorded conference
  🔹 Take text and translate into text (text2text) -> t2tr  <br />
  🔹 Take audio and **enhance quality** into audio (audio2audio) -> a2a  <br />
  🔹 Take audio & text transcript and produce subtitles (audio+text2subtitles) -> at2s  <br />
- 🔹 Take text and stable diffusion produce **image** (text2image) -> t2i  <br />
+
 
 
  
 </details>
 
-### Screenshots & Tutorial: [Wiki](https://github.com/GabrieleRisso/aiyu/edit/main/wiki.md "Aiyu Wiki")
+### Screenshots & Tutorial: [Wiki](https://github.com/GabrieleRisso/MatrixGPT/edit/main/wiki.md "MatrixGPT Wiki")
 
  <p align="left"> <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FGabrieleRisso%2Faiyu&count_bg=%234D4244&title_bg=%23EA2424&icon_color=%233E3636&title=aiyu+&edge_flat=false"/></a> </p>
 
+## Dependancies: 
+
+Install [Docker](https://docs.docker.com/engine/install/ "Docker")
 
 ## In the terminal:
 
 ###### download directory and enter it:
 ```
-git clone https://github.com/GabrieleRisso/aiyu.git 
-cd aiyu/
+git clone https://github.com/GabrieleRisso/MatrixGPT.git 
+cd MatrixGPT/
 ```
-###### set the key to global scope: 
+###### edit the .env file. (only the top section, the rest work by default): 
 ```
-. env.list
+nano .env
 ```
-###### load a function:
+###### OPTIONAL edit the setup script (the setup is guided ):  
 ```
-. t2s
+nano setup
 ```
-###### use it like this:
+
+###### use it like this
 ```
-t2a "How are you ?"
+matrix
 ```
 
 
@@ -126,10 +131,6 @@ They are prompted if missing and a link to install them is provided. Functions m
  * per-command tuning
  * wiki documentation 
  * suggestions are desired!
-
-
-
-
 
 
 
